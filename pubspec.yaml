@@ -27,7 +27,6 @@ dependencies:
   amplify_analytics_pinpoint: '0.0.1-dev.1'
   amplify_auth_cognito: '0.0.1-dev.1'
   amplify_storage_s3: '0.0.1-dev.1'
-  loading: '^1.0.2'
 
 
   # The following adds the Cupertino Icons font to your application.

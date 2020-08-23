@@ -3,9 +3,6 @@ import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_core/amplify_core.dart';
 import 'dart:developer' as dev;
 
-import 'package:loading/loading.dart';
-import 'package:loading/indicator/ball_pulse_indicator.dart';
-
 class SignUp extends StatefulWidget {
   SignUp({Key key}) : super(key: key);
 
@@ -36,7 +33,6 @@ class SignUpState extends State<SignUp> {
           username: _usernameController.text.trim(),
           password: _passwordController.text.trim(),
           options: CognitoSignUpOptions(userAttributes: userAttributes));
-
       setState(() {
         _isSignedUp = true;
         _loading = false;
@@ -84,16 +80,6 @@ class SignUpState extends State<SignUp> {
             key: _formKey,
             child: Column(
               children: <Widget>[
-                Visibility(
-                  visible: _loading,
-                  child: Container(
-                      child: Center(
-                    child: Loading(
-                        indicator: BallPulseIndicator(),
-                        size: 100.0,
-                        color: Colors.deepOrange),
-                  )),
-                ),
                 Visibility(
                     visible: _isSignedUp,
                     child: Column(
