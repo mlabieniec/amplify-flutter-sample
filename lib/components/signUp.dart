@@ -141,7 +141,7 @@ class SignUpState extends State<SignUp> {
                         padding: EdgeInsets.all(5),
                         child: Text('Create a New Account',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 24)),
+                                fontWeight: FontWeight.w400, fontSize: 24)),
                       ),
                       TextFormField(
                         controller: _usernameController,

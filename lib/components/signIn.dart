@@ -54,7 +54,7 @@ class SignInState extends State<SignIn> {
                   padding: EdgeInsets.all(10),
                   child: Text('Sign in to Your Account',
                       style:
-                          TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
+                          TextStyle(fontWeight: FontWeight.w400, fontSize: 24)),
                 ),
                 TextFormField(
                   controller: _usernameController,
