@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import '../components/signIn.dart';
 import '../components/signUp.dart';
 import '../components/forgotPassword.dart';
-import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
 class Authenticator extends StatelessWidget {
   Authenticator() {}
