@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_core/amplify_core.dart';
+import 'dart:developer' as dev;
 
 class SignUp extends StatefulWidget {
   SignUp({Key key}) : super(key: key);
@@ -9,6 +12,12 @@ class SignUp extends StatefulWidget {
 
 class SignUpState extends State<SignUp> {
   final _formKey = GlobalKey<FormState>();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  final _emailController = TextEditingController();
+  final _verifyPasswordController = TextEditingController();
+
+  void _signUp() async {}
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +33,7 @@ class SignUpState extends State<SignUp> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
                 ),
                 TextFormField(
+                  controller: _usernameController,
                   decoration: InputDecoration(hintText: "Enter a Username"),
                   // The validator receives the text that the user has entered.
                   validator: (value) {
@@ -34,6 +44,7 @@ class SignUpState extends State<SignUp> {
                   },
                 ),
                 TextFormField(
+                  controller: _emailController,
                   decoration: InputDecoration(hintText: "Enter your Email"),
                   // The validator receives the text that the user has entered.
                   validator: (value) {
@@ -44,6 +55,7 @@ class SignUpState extends State<SignUp> {
                   },
                 ),
                 TextFormField(
+                  controller: _passwordController,
                   decoration: InputDecoration(hintText: "Enter a Password"),
                   obscureText: true,
                   // The validator receives the text that the user has entered.
@@ -52,6 +64,22 @@ class SignUpState extends State<SignUp> {
                       return 'Please enter a Password';
                     }
                     return null;
+                  },
+                ),
+                TextFormField(
+                  controller: _verifyPasswordController,
+                  decoration: InputDecoration(hintText: "Verify Password"),
+                  obscureText: true,
+                  // The validator receives the text that the user has entered.
+                  validator: (value) {
+                    if (value.isEmpty) {
+                      return 'Please verify password';
+                    }
+                    if (value.contains(_passwordController.text.trim())) {
+                      return null;
+                    } else {
+                      return 'Passwords do not match';
+                    }
                   },
                 ),
                 ConstrainedBox(

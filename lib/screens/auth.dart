@@ -20,11 +20,6 @@ class AuthenticatorState extends State<Authenticator> {
               leading: Padding(
                   padding: EdgeInsets.all(10),
                   child: Image.asset('assets/amplify.png')),
-              /*
-              leading: IconButton(
-                icon: Image.asset('assets/amplify.png'),
-                onPressed: () {},
-              ),*/
               bottom: TabBar(
                 tabs: [
                   Tab(icon: Icon(Icons.person_add_outlined)),
