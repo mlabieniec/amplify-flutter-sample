@@ -1,27 +1,32 @@
-import 'package:flutter/material.dart';
-import '../components/signIn.dart';
-import '../components/signUp.dart';
-import '../components/forgotPassword.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:flutter/material.dart';
 
-class Authenticator extends StatelessWidget {
-  Authenticator() {}
-
+class Home extends StatelessWidget {
+  AmplifyAuthCognito _auth;
+  Home(AmplifyAuthCognito auth) {
+    this._auth = auth;
+  }
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 3,
+        length: 2,
         child: Scaffold(
             appBar: AppBar(
               title: Text("Photos"),
+              actions: [
+                IconButton(
+                    icon: Icon(Icons.close),
+                    onPressed: () {
+                      this._auth.signOut(request: null);
+                    })
+              ],
               leading: Padding(
                   padding: EdgeInsets.fromLTRB(15, 5, 0, 5),
                   child: Image.asset('assets/amplify.png')),
               bottom: TabBar(
                 tabs: [
-                  Tab(icon: Icon(Icons.person_add_outlined)),
-                  Tab(icon: Icon(Icons.login)),
-                  Tab(icon: Icon(Icons.person_search_outlined))
+                  Tab(icon: Icon(Icons.photo)),
+                  Tab(icon: Icon(Icons.person))
                 ],
               ),
             ),
@@ -29,15 +34,11 @@ class Authenticator extends StatelessWidget {
               children: [
                 Padding(
                   padding: EdgeInsets.all(15),
-                  child: SignUp(),
+                  child: Text("Main View"),
                 ),
                 Padding(
                   padding: EdgeInsets.all(15),
-                  child: SignIn(),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(15),
-                  child: ForgotPassword(),
+                  child: Text("Profile"),
                 )
               ],
             )));

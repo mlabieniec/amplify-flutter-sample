@@ -22,7 +22,7 @@ class SignInState extends State<SignIn> {
   void _signIn() async {
     try {
       Scaffold.of(context)
-          .showSnackBar(SnackBar(content: Text('Processing Data')));
+          .showSnackBar(SnackBar(content: Text('Signing in...')));
       SignInResult res = await Amplify.Auth.signIn(
           username: _usernameController.text.trim(),
           password: _passwordController.text.trim());
