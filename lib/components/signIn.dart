@@ -1,4 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_core/amplify_core.dart';
+import 'dart:developer' as dev;
 
 class SignIn extends StatefulWidget {
   SignIn({Key key}) : super(key: key);
@@ -9,6 +14,34 @@ class SignIn extends StatefulWidget {
 
 class SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
+  final _usernameController = TextEditingController();
+  final _passwordController = TextEditingController();
+  String _signUpError = "";
+  List<String> _signUpExceptions = [];
+
+  void _signIn() async {
+    try {
+      Scaffold.of(context)
+          .showSnackBar(SnackBar(content: Text('Processing Data')));
+      SignInResult res = await Amplify.Auth.signIn(
+          username: _usernameController.text.trim(),
+          password: _passwordController.text.trim());
+      //Navigator.pop(context, true);
+      dev.log('Sign In Result: ' + res.toString(),
+          name: 'com.amazonaws.amplify');
+    } on AuthError catch (e) {
+      Scaffold.of(context).hideCurrentSnackBar();
+      dev.log('Sign in Error', name: 'com.amazonaws.amplify', error: e);
+      setState(() {
+        _signUpError = e.cause;
+        _signUpExceptions.clear();
+        e.exceptionList.forEach((el) {
+          _signUpExceptions.add(el.exception);
+        });
+        Scaffold.of(context).showSnackBar(SnackBar(content: Text(e.cause)));
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +57,7 @@ class SignInState extends State<SignIn> {
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 24)),
                 ),
                 TextFormField(
+                  controller: _usernameController,
                   decoration: InputDecoration(hintText: "Enter a Username"),
                   // The validator receives the text that the user has entered.
                   validator: (value) {
@@ -34,6 +68,7 @@ class SignInState extends State<SignIn> {
                   },
                 ),
                 TextFormField(
+                  controller: _passwordController,
                   decoration: InputDecoration(hintText: "Enter a Password"),
                   obscureText: true,
                   // The validator receives the text that the user has entered.
@@ -53,11 +88,7 @@ class SignInState extends State<SignIn> {
                         onPressed: () {
                           // Validate returns true if the form is valid, otherwise false.
                           if (_formKey.currentState.validate()) {
-                            // If the form is valid, display a snackbar. In the real world,
-                            // you'd often call a server or save the information in a database.
-
-                            Scaffold.of(context).showSnackBar(
-                                SnackBar(content: Text('Processing Data')));
+                            _signIn();
                           }
                         },
                         child: Text('SIGN IN'),
