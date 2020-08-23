@@ -1,0 +1,20 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-flutterphotos-dev-171544-authRole",
+            "UnauthRoleArn": "arn:aws:iam::207430879252:role/amplify-flutterphotos-dev-171544-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::207430879252:role/amplify-flutterphotos-dev-171544-authRole",
+            "Region": "us-east-2",
+            "DeploymentBucketName": "amplify-flutterphotos-dev-171544-deployment",
+            "UnauthRoleName": "amplify-flutterphotos-dev-171544-unauthRole",
+            "StackName": "amplify-flutterphotos-dev-171544",
+            "StackId": "arn:aws:cloudformation:us-east-2:207430879252:stack/amplify-flutterphotos-dev-171544/a531f280-e4bc-11ea-a58c-06e35090f892",
+            "AmplifyAppId": "d36t1wo10dwyuq"
+        },
+        "categories": {
+            "auth": {
+                "flutterphotos13ef10e3": {}
+            }
+        }
+    }
+}

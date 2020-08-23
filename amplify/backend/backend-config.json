@@ -1,0 +1,22 @@
+{
+	"auth": {
+		"flutterphotos13ef10e3": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	},
+	"analytics": {
+		"flutterphotos": {
+			"service": "Pinpoint",
+			"providerPlugin": "awscloudformation"
+		}
+	},
+	"storage": {
+		"s3d9c61dca": {
+			"service": "S3",
+			"providerPlugin": "awscloudformation"
+		}
+	}
+}

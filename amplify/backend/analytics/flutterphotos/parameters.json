@@ -1,0 +1,21 @@
+{
+    "appName": "flutterphotos",
+    "roleName": "pinpointLambdaRolebc3e6bbb",
+    "cloudformationPolicyName": "cloudformationPolicybc3e6bbb",
+    "cloudWatchPolicyName": "cloudWatchPolicybc3e6bbb",
+    "pinpointPolicyName": "pinpointPolicybc3e6bbb",
+    "authPolicyName": "pinpoint_amplify_bc3e6bbb",
+    "unauthPolicyName": "pinpoint_amplify_bc3e6bbb",
+    "authRoleName": {
+        "Ref": "AuthRoleName"
+    },
+    "unauthRoleName": {
+        "Ref": "UnauthRoleName"
+    },
+    "authRoleArn": {
+        "Fn::GetAtt": [
+            "AuthRole",
+            "Arn"
+        ]
+    }
+}
