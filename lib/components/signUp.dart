@@ -38,13 +38,13 @@ class SignUpState extends State<SignUp> {
         _loading = false;
       });
     } on AuthError catch (error) {
-      print(error);
       setState(() {
         _isSignedUp = false;
         _loading = false;
       });
+      Scaffold.of(context).hideCurrentSnackBar();
       Scaffold.of(context)
-          .showSnackBar(SnackBar(content: Text('Failed to create account')));
+          .showSnackBar(SnackBar(content: Text(error.exceptionList[1].detail)));
     }
   }
 

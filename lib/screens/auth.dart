@@ -2,15 +2,35 @@ import 'package:flutter/material.dart';
 import '../components/signIn.dart';
 import '../components/signUp.dart';
 import '../components/forgotPassword.dart';
+import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 
-class Authenticator extends StatefulWidget {
-  Authenticator({Key key}) : super(key: key);
+class Authenticator extends StatelessWidget {
+  Authenticator(AmplifyAuthCognito auth) {
+    auth?.events?.listenToAuth((hubEvent) {
+      switch (hubEvent["eventName"]) {
+        case "SIGNED_IN":
+          {
+            print("USER IS SIGNED IN");
+          }
+          break;
+        case "SIGNED_OUT":
+          {
+            print("USER IS SIGNED OUT");
+          }
+          break;
+        case "SESSION_EXPIRED":
+          {
+            print("USER IS SIGNED IN");
+          }
+          break;
+        default:
+          {
+            print("CONFIGURATION EVENT");
+          }
+      }
+    });
+  }
 
-  @override
-  AuthenticatorState createState() => AuthenticatorState();
-}
-
-class AuthenticatorState extends State<Authenticator> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

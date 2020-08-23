@@ -26,20 +26,12 @@ class SignInState extends State<SignIn> {
       SignInResult res = await Amplify.Auth.signIn(
           username: _usernameController.text.trim(),
           password: _passwordController.text.trim());
-      //Navigator.pop(context, true);
       dev.log('Sign In Result: ' + res.toString(),
           name: 'com.amazonaws.amplify');
     } on AuthError catch (e) {
       Scaffold.of(context).hideCurrentSnackBar();
-      dev.log('Sign in Error', name: 'com.amazonaws.amplify', error: e);
-      setState(() {
-        _signUpError = e.cause;
-        _signUpExceptions.clear();
-        e.exceptionList.forEach((el) {
-          _signUpExceptions.add(el.exception);
-        });
-        Scaffold.of(context).showSnackBar(SnackBar(content: Text(e.cause)));
-      });
+      Scaffold.of(context)
+          .showSnackBar(SnackBar(content: Text(e.exceptionList[1].detail)));
     }
   }
 

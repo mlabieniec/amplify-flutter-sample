@@ -4,7 +4,6 @@ import 'package:amplify_core/amplify_core.dart';
 import 'package:amplify_storage_s3/amplify_storage_s3.dart';
 import 'package:flutter/material.dart';
 import 'amplifyconfiguration.dart';
-
 import 'screens/auth.dart';
 
 void main() {
@@ -18,6 +17,9 @@ class MyAppState extends StatefulWidget {
 
 class MyApp extends State<MyAppState> {
   Amplify amplify = Amplify();
+  AmplifyAuthCognito auth = AmplifyAuthCognito();
+  AmplifyStorageS3 storage = AmplifyStorageS3();
+  AmplifyAnalyticsPinpoint analytics = AmplifyAnalyticsPinpoint();
   bool configured = false;
 
   @override
@@ -27,10 +29,6 @@ class MyApp extends State<MyAppState> {
   }
 
   void configureAmplify() async {
-    AmplifyAuthCognito auth = AmplifyAuthCognito();
-    AmplifyStorageS3 storage = AmplifyStorageS3();
-    AmplifyAnalyticsPinpoint analytics = AmplifyAnalyticsPinpoint();
-
     amplify.addPlugin(
         authPlugins: [auth],
         storagePlugins: [storage],
@@ -53,7 +51,7 @@ class MyApp extends State<MyAppState> {
         accentColor: Colors.grey,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: Authenticator(),
+      home: Authenticator(auth),
     );
   }
 }
