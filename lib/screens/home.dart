@@ -17,11 +17,13 @@ class Home extends StatelessWidget {
     this._initCamera();
   }
 
+  /**
+   * Initialize the device camera
+   * Ensure that plugin services are initialized
+   * and Obtain a list of the available cameras on the device.
+   */
   void _initCamera() async {
-    // Ensure that plugin services are initialized so that `availableCameras()`
-    // can be called before `runApp()`
     WidgetsFlutterBinding.ensureInitialized();
-    // Obtain a list of the available cameras on the device.
     try {
       this.cameras = await availableCameras();
       this.firstCamera = cameras.first;
@@ -133,7 +135,8 @@ class TakePictureScreenState extends State<TakePictureScreen> {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.camera_alt),
+        child: Icon(Icons.camera_enhance),
+        backgroundColor: Colors.white,
         // Provide an onPressed callback.
         onPressed: () async {
           // Take the Picture in a try / catch block. If anything goes wrong,
@@ -180,7 +183,15 @@ class DisplayPictureScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Display the Picture')),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.save_alt),
+        backgroundColor: Colors.accents[0],
+        // Provide an onPressed callback.
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+      appBar: AppBar(title: Text('Edit and Save')),
       // The image is stored as a file on the device. Use the `Image.file`
       // constructor with the given path to display the image.
       body: Image.file(File(imagePath)),

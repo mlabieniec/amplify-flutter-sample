@@ -25,6 +25,8 @@ class MyApp extends State<MyAppState> {
   bool configured = false;
   bool authenticated = false;
 
+  Future<AuthSession> _authSession;
+
   @override
   initState() {
     super.initState();
@@ -68,42 +70,44 @@ class MyApp extends State<MyAppState> {
    */
   void _checkSession() async {
     print("Checking Auth Session...");
-    var session = await auth.fetchAuthSession();
-    print("AUTH_SESSION: ${session.isSignedIn}");
-    setState(() {
-      authenticated = session.isSignedIn;
-    });
-    auth.events.listenToAuth((hubEvent) {
-      switch (hubEvent["eventName"]) {
-        case "SIGNED_IN":
-          {
-            print("HUB: USER IS SIGNED IN");
-            setState(() {
-              authenticated = true;
-            });
-          }
-          break;
-        case "SIGNED_OUT":
-          {
-            print("HUB: USER IS SIGNED OUT");
-            setState(() {
-              authenticated = false;
-            });
-          }
-          break;
-        case "SESSION_EXPIRED":
-          {
-            print("HUB: USER SESSION EXPIRED");
-            setState(() {
-              authenticated = false;
-            });
-          }
-          break;
-        default:
-          {
-            print("HUB: CONFIGURATION EVENT");
-          }
-      }
+    this._authSession = auth.fetchAuthSession();
+    this._authSession.then((session) {
+      print("AUTH_SESSION: ${session.isSignedIn}");
+      setState(() {
+        authenticated = session.isSignedIn;
+      });
+      auth.events.listenToAuth((hubEvent) {
+        switch (hubEvent["eventName"]) {
+          case "SIGNED_IN":
+            {
+              print("HUB: USER IS SIGNED IN");
+              setState(() {
+                authenticated = true;
+              });
+            }
+            break;
+          case "SIGNED_OUT":
+            {
+              print("HUB: USER IS SIGNED OUT");
+              setState(() {
+                authenticated = false;
+              });
+            }
+            break;
+          case "SESSION_EXPIRED":
+            {
+              print("HUB: USER SESSION EXPIRED");
+              setState(() {
+                authenticated = false;
+              });
+            }
+            break;
+          default:
+            {
+              print("HUB: CONFIGURATION EVENT");
+            }
+        }
+      });
     });
   }
 
@@ -117,6 +121,16 @@ class MyApp extends State<MyAppState> {
           accentColor: Colors.grey,
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: authenticated ? Home(auth) : Authenticator());
+        home: new FutureBuilder<void>(
+          future: _authSession,
+          builder: (context, snapshot) {
+            print(snapshot.hasData);
+            if (snapshot.connectionState == ConnectionState.done) {
+              return this.authenticated ? Home(auth) : Authenticator();
+            } else {
+              return Center(child: CircularProgressIndicator());
+            }
+          },
+        ));
   }
 }
