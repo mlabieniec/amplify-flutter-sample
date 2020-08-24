@@ -18,9 +18,9 @@ class Authenticator extends StatelessWidget {
                   child: Image.asset('assets/amplify.png')),
               bottom: TabBar(
                 tabs: [
-                  Tab(icon: Icon(Icons.person_add_outlined)),
-                  Tab(icon: Icon(Icons.login)),
-                  Tab(icon: Icon(Icons.person_search_outlined))
+                  Tab(icon: Icon(Icons.person_add)),
+                  Tab(icon: Icon(Icons.person)),
+                  Tab(icon: Icon(Icons.person_outline))
                 ],
               ),
             ),

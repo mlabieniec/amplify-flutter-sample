@@ -1,0 +1,125 @@
+PODS:
+  - Amplify (1.1.1):
+    - Amplify/Default (= 1.1.1)
+  - Amplify/Default (1.1.1)
+  - amplify_analytics_pinpoint (0.0.1):
+    - Amplify
+    - AmplifyPlugins/AWSPinpointAnalyticsPlugin
+    - Flutter
+  - amplify_auth_cognito (0.0.1):
+    - Amplify
+    - AmplifyPlugins/AWSCognitoAuthPlugin
+    - Flutter
+    - ObjectMapper
+  - amplify_core (0.0.1):
+    - Amplify
+    - AmplifyPlugins/AWSCognitoAuthPlugin
+    - AWSPluginsCore
+    - Flutter
+  - amplify_storage_s3 (0.0.1):
+    - Amplify
+    - AmplifyPlugins/AWSS3StoragePlugin
+    - AWSPluginsCore
+    - Flutter
+  - AmplifyPlugins/AWSCognitoAuthPlugin (1.1.1):
+    - AWSAuthCore (~> 2.15.0)
+    - AWSCore (~> 2.15.0)
+    - AWSMobileClient (~> 2.15.0)
+    - AWSPluginsCore (= 1.1.1)
+  - AmplifyPlugins/AWSPinpointAnalyticsPlugin (1.1.1):
+    - AWSAuthCore (~> 2.15.0)
+    - AWSCore (~> 2.15.0)
+    - AWSPinpoint (~> 2.15.0)
+    - AWSPluginsCore (= 1.1.1)
+  - AmplifyPlugins/AWSS3StoragePlugin (1.1.1):
+    - AWSAuthCore (~> 2.15.0)
+    - AWSCore (~> 2.15.0)
+    - AWSPluginsCore (= 1.1.1)
+    - AWSS3 (~> 2.15.0)
+  - AWSAuthCore (2.15.1):
+    - AWSCore (= 2.15.1)
+  - AWSCognitoIdentityProvider (2.15.1):
+    - AWSCognitoIdentityProviderASF (= 1.0.1)
+    - AWSCore (= 2.15.1)
+  - AWSCognitoIdentityProviderASF (1.0.1)
+  - AWSCore (2.15.1)
+  - AWSMobileClient (2.15.1):
+    - AWSAuthCore (= 2.15.1)
+    - AWSCognitoIdentityProvider (= 2.15.1)
+  - AWSPinpoint (2.15.1):
+    - AWSCore (= 2.15.1)
+  - AWSPluginsCore (1.1.1):
+    - Amplify (= 1.1.1)
+    - AWSCore (~> 2.15.0)
+    - AWSMobileClient (~> 2.15.0)
+  - AWSS3 (2.15.1):
+    - AWSCore (= 2.15.1)
+  - camera (0.0.1):
+    - Flutter
+  - Flutter (1.0.0)
+  - ObjectMapper (4.2.0)
+  - path_provider (0.0.1):
+    - Flutter
+
+DEPENDENCIES:
+  - amplify_analytics_pinpoint (from `.symlinks/plugins/amplify_analytics_pinpoint/ios`)
+  - amplify_auth_cognito (from `.symlinks/plugins/amplify_auth_cognito/ios`)
+  - amplify_core (from `.symlinks/plugins/amplify_core/ios`)
+  - amplify_storage_s3 (from `.symlinks/plugins/amplify_storage_s3/ios`)
+  - camera (from `.symlinks/plugins/camera/ios`)
+  - Flutter (from `Flutter`)
+  - path_provider (from `.symlinks/plugins/path_provider/ios`)
+
+SPEC REPOS:
+  trunk:
+    - Amplify
+    - AmplifyPlugins
+    - AWSAuthCore
+    - AWSCognitoIdentityProvider
+    - AWSCognitoIdentityProviderASF
+    - AWSCore
+    - AWSMobileClient
+    - AWSPinpoint
+    - AWSPluginsCore
+    - AWSS3
+    - ObjectMapper
+
+EXTERNAL SOURCES:
+  amplify_analytics_pinpoint:
+    :path: ".symlinks/plugins/amplify_analytics_pinpoint/ios"
+  amplify_auth_cognito:
+    :path: ".symlinks/plugins/amplify_auth_cognito/ios"
+  amplify_core:
+    :path: ".symlinks/plugins/amplify_core/ios"
+  amplify_storage_s3:
+    :path: ".symlinks/plugins/amplify_storage_s3/ios"
+  camera:
+    :path: ".symlinks/plugins/camera/ios"
+  Flutter:
+    :path: Flutter
+  path_provider:
+    :path: ".symlinks/plugins/path_provider/ios"
+
+SPEC CHECKSUMS:
+  Amplify: e23b610dde2539d67ec29843c7f01010b44b98ba
+  amplify_analytics_pinpoint: ed8e72e7c27d1ccd525eeba1b76c8b9487cb8ac7
+  amplify_auth_cognito: 21e6e4acd861653d73875ee7d8ddce1a404e23cf
+  amplify_core: 2a2f529ae93d03692c969215daffd6d4bda54b9b
+  amplify_storage_s3: 70bd7eb65b2982bc386faf606bae66819ed2ac56
+  AmplifyPlugins: 9e1e1bff2a8b1676307101ca7d768a7be49c0456
+  AWSAuthCore: d98801d505ea332fd1ec28fbaf3377e0ce02100f
+  AWSCognitoIdentityProvider: 5172f21b3530adbb1549501cd26e126bb211b85c
+  AWSCognitoIdentityProviderASF: f94f1a502e72ef3d0a1de93e10bf7a79c8698118
+  AWSCore: 7dec5eefb9b95739adec68dcb3dba2a6770376a6
+  AWSMobileClient: 23aa8e4a787553742861ea1e3272420a9aaf4938
+  AWSPinpoint: 21b3509de2a5288054c0a60a8acc7d56f3bbbad4
+  AWSPluginsCore: 4e98e284fff7763470ef94f7538449f20d891f70
+  AWSS3: 13059f6168fbeba52600e2cb5473eeb588d76c51
+  camera: a0ca5080336f7af47b88436e5e26da3dee5568f0
+  Flutter: 0e3d915762c693b495b44d77113d4970485de6ec
+  ObjectMapper: 1eb41f610210777375fa806bf161dc39fb832b81
+  path_provider: abfe2b5c733d04e238b0d8691db0cfd63a27a93c
+
+PODFILE CHECKSUM: 7368163408c647b7eb699d0d788ba6718e18fb8d
+
+COCOAPODS: 1.8.4
