@@ -1,15 +1,22 @@
-# flutterphotos
+# AWS Amplify Flutter Demo App
 
-A new Flutter project.
+An example application using the AWS Amplify Framework and Flutter. To get started, install the Amplify CLI.
 
-## Getting Started
+```bash
 
-This project is a starting point for a Flutter application.
+$ npm i -g @aws-amplify/cli@flutter-preview
+$ git clone git@github.com:mlabieniec/flutter-amplify-auth
+$ cd flutter-amplify-auth
+$ flutter pub get
+$ amplify init
+$ flutter run # ensure you have an emulator running or device attached
 
-A few resources to get you started if this is your first Flutter project:
+```
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+Helpful resources:
+
+- [Beginner's Guide to Futures](https://medium.com/flutter-community/a-guide-to-using-futures-in-flutter-for-beginners-ebeddfbfb967)
+- [Using the Camera](https://flutter.dev/docs/cookbook/plugins/picture-using-camera#complete-example)
 
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
