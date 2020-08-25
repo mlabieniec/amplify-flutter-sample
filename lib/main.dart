@@ -67,8 +67,13 @@ class MyApp extends State<MyAppState> {
   Future<void> _checkSession() async {
     print("Checking Auth Session...");
     try {
-      await auth.fetchAuthSession();
-    } catch (error) {}
+      var session = await auth.fetchAuthSession();
+      this.authenticated = session.isSignedIn;
+    } catch (error) {
+      // if not signed in this should be caught
+      // either way we will setup HUB events
+      // print(error);
+    }
     this._setupAuthEvents();
   }
 
