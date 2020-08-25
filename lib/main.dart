@@ -28,7 +28,6 @@ class MyApp extends State<MyAppState> {
   @override
   initState() {
     super.initState();
-    print("initState");
     // Add the Amplify category plugins, plugins should
     // be added here in order for configuration to work
     // DO NOT add plugins that you haven't configured via
@@ -51,7 +50,6 @@ class MyApp extends State<MyAppState> {
       setState(() {
         configured = true;
       });
-      return true;
     }).catchError((e) {
       return print(e);
     });
@@ -122,7 +120,6 @@ class MyApp extends State<MyAppState> {
         home: new FutureBuilder<void>(
           future: _checkSession(),
           builder: (context, snapshot) {
-            print(snapshot.hasData);
             if (snapshot.connectionState == ConnectionState.done) {
               return this.authenticated ? Home(auth) : Authenticator();
             } else {
