@@ -45,7 +45,7 @@ class Home extends StatelessWidget {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () => this._openCameraView(context),
-          backgroundColor: Colors.orange,
+          backgroundColor: Theme.of(context).primaryColor,
           tooltip: 'Capture a photo',
           child: Icon(Icons.add_a_photo),
         ),
@@ -185,7 +185,7 @@ class DisplayPictureScreen extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.save_alt),
-        backgroundColor: Colors.accents[0],
+        backgroundColor: Theme.of(context).accentColor,
         // Provide an onPressed callback.
         onPressed: () {
           Navigator.pop(context);

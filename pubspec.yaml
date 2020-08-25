@@ -23,10 +23,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  amplify_core: '0.0.1-dev.1'
-  amplify_analytics_pinpoint: '0.0.1-dev.1'
-  amplify_auth_cognito: '0.0.1-dev.1'
-  amplify_storage_s3: '0.0.1-dev.1'
+  amplify_core: '0.0.1-dev.2'
+  amplify_analytics_pinpoint: '0.0.1-dev.2'
+  amplify_auth_cognito: '0.0.1-dev.2'
+  amplify_storage_s3: '0.0.1-dev.2'
   camera:
   path_provider:
   path:

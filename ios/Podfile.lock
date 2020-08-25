@@ -14,12 +14,11 @@ PODS:
   - amplify_core (0.0.1):
     - Amplify
     - AmplifyPlugins/AWSCognitoAuthPlugin
-    - AWSPluginsCore
+    - AWSPluginsCore (= 1.1.1)
     - Flutter
   - amplify_storage_s3 (0.0.1):
     - Amplify
     - AmplifyPlugins/AWSS3StoragePlugin
-    - AWSPluginsCore
     - Flutter
   - AmplifyPlugins/AWSCognitoAuthPlugin (1.1.1):
     - AWSAuthCore (~> 2.15.0)
@@ -104,8 +103,8 @@ SPEC CHECKSUMS:
   Amplify: e23b610dde2539d67ec29843c7f01010b44b98ba
   amplify_analytics_pinpoint: ed8e72e7c27d1ccd525eeba1b76c8b9487cb8ac7
   amplify_auth_cognito: 21e6e4acd861653d73875ee7d8ddce1a404e23cf
-  amplify_core: 2a2f529ae93d03692c969215daffd6d4bda54b9b
-  amplify_storage_s3: 70bd7eb65b2982bc386faf606bae66819ed2ac56
+  amplify_core: c13855678f4701fa81096949a56be6a1d489d982
+  amplify_storage_s3: bf5954f417944919e702998a0ce95e742015063a
   AmplifyPlugins: 9e1e1bff2a8b1676307101ca7d768a7be49c0456
   AWSAuthCore: d98801d505ea332fd1ec28fbaf3377e0ce02100f
   AWSCognitoIdentityProvider: 5172f21b3530adbb1549501cd26e126bb211b85c
