@@ -23,13 +23,14 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  amplify_core: '0.0.1-dev.2'
-  amplify_analytics_pinpoint: '0.0.1-dev.2'
-  amplify_auth_cognito: '0.0.1-dev.2'
-  amplify_storage_s3: '0.0.1-dev.2'
+  amplify_core:
+  amplify_analytics_pinpoint:
+  amplify_auth_cognito:
+  amplify_storage_s3:
   camera:
   path_provider:
   path:
+  pedantic: ^1.8.0
 
 
   # The following adds the Cupertino Icons font to your application.

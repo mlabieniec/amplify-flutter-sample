@@ -126,7 +126,7 @@ class MyApp extends State<MyAppState> {
           future: _checkSession(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              return this.authenticated ? Home(auth) : Authenticator();
+              return this.authenticated ? Home(auth: auth) : Authenticator();
             } else {
               return Center(child: CircularProgressIndicator());
             }
