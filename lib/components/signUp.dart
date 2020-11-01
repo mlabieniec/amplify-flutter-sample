@@ -19,55 +19,44 @@ class SignUpState extends State<SignUp> {
   final _confirmController = TextEditingController();
 
   bool _isSignedUp = false;
-  bool _loading = false;
-
-  String _signUpError = "";
-  List<String> _signUpExceptions = [];
 
   void _signUp() async {
-    _loading = true;
-    Scaffold.of(context).showSnackBar(SnackBar(content: Text('Signing Up...')));
+    Scaffold.of(context).showSnackBar(SnackBar(content: Text("Signing Up...")));
     Map<String, dynamic> userAttributes = {"email": _emailController.text};
     try {
-      SignUpResult res = await Amplify.Auth.signUp(
+      await Amplify.Auth.signUp(
           username: _usernameController.text.trim(),
           password: _passwordController.text.trim(),
           options: CognitoSignUpOptions(userAttributes: userAttributes));
       setState(() {
         _isSignedUp = true;
-        _loading = false;
       });
     } on AuthError catch (error) {
       setState(() {
         _isSignedUp = false;
-        _loading = false;
       });
+      print(error.exceptionList[1].detail);
       Scaffold.of(context).hideCurrentSnackBar();
-      Scaffold.of(context)
-          .showSnackBar(SnackBar(content: Text(error.exceptionList[1].detail)));
+      Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text("Sign up failed, do you already have an account?")));
     }
   }
 
   void _confirm() async {
-    setState(() {
-      _loading = true;
-    });
     Scaffold.of(context).showSnackBar(SnackBar(content: Text('Confirming...')));
     try {
-      SignUpResult res = await Amplify.Auth.confirmSignUp(
+      await Amplify.Auth.confirmSignUp(
           username: _usernameController.text.trim(),
           confirmationCode: _confirmController.text.trim());
       Scaffold.of(context).hideCurrentSnackBar();
       Scaffold.of(context).showSnackBar(
           SnackBar(content: Text('Confirmed, you can now login.')));
       setState(() {
-        _loading = false;
         _isSignedUp = false;
       });
     } on AuthError catch (error) {
       dev.log(error.toString());
       setState(() {
-        _loading = false;
         _isSignedUp = false;
       });
     }
@@ -94,7 +83,6 @@ class SignUpState extends State<SignUp> {
                           controller: _confirmController,
                           decoration: InputDecoration(
                               hintText: "Enter confirmation code"),
-                          // The validator receives the text that the user has entered.
                           validator: (value) {
                             if (value.isEmpty) {
                               return 'Please enter confirmation code';
@@ -109,7 +97,6 @@ class SignUpState extends State<SignUp> {
                               padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
                               child: RaisedButton(
                                 onPressed: () {
-                                  // Validate returns true if the form is valid, otherwise false.
                                   if (_formKey.currentState.validate()) {
                                     _confirm();
                                   }
@@ -147,7 +134,6 @@ class SignUpState extends State<SignUp> {
                         controller: _usernameController,
                         decoration:
                             InputDecoration(hintText: "Enter a Username"),
-                        // The validator receives the text that the user has entered.
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please enter a Username';
@@ -159,7 +145,6 @@ class SignUpState extends State<SignUp> {
                         controller: _emailController,
                         decoration:
                             InputDecoration(hintText: "Enter your Email"),
-                        // The validator receives the text that the user has entered.
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please enter an Email Address';
@@ -172,7 +157,6 @@ class SignUpState extends State<SignUp> {
                         decoration:
                             InputDecoration(hintText: "Enter a Password"),
                         obscureText: true,
-                        // The validator receives the text that the user has entered.
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please enter a Password';
@@ -185,7 +169,6 @@ class SignUpState extends State<SignUp> {
                         decoration:
                             InputDecoration(hintText: "Verify Password"),
                         obscureText: true,
-                        // The validator receives the text that the user has entered.
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please verify password';
@@ -204,7 +187,6 @@ class SignUpState extends State<SignUp> {
                             padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
                             child: RaisedButton(
                               onPressed: () {
-                                // Validate returns true if the form is valid, otherwise false.
                                 if (_formKey.currentState.validate()) {
                                   _signUp();
                                 }

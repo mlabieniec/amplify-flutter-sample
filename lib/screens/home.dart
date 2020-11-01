@@ -13,16 +13,26 @@ class Home extends StatefulWidget {
 
 class HomeState extends State<Home> {
   dynamic _openCameraView(BuildContext context) async {
-    var cam = (await availableCameras()).first;
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => Capture(camera: cam)));
+    try {
+      var cameras = await availableCameras();
+      if (cameras.length > 0) {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => Capture(camera: cameras.first)));
+      } else {
+        print("No cameras found");
+      }
+    } on Exception catch (e) {
+      print(e);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
-          onPressed: () => this._openCameraView(context),
+          onPressed: () => _openCameraView(context),
           backgroundColor: Theme.of(context).primaryColor,
           tooltip: 'Capture a photo',
           child: Icon(Icons.add_a_photo),

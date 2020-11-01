@@ -1,9 +1,4 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
-import 'package:amplify_core/amplify_core.dart';
-import 'dart:developer' as dev;
 
 class ForgotPassword extends StatefulWidget {
   ForgotPassword({Key key}) : super(key: key);
@@ -49,7 +44,6 @@ class ForgotPasswordState extends State<ForgotPassword> {
                       padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
                       child: RaisedButton(
                         onPressed: () {
-                          // Validate returns true if the form is valid, otherwise false.
                           if (_formKey.currentState.validate()) {
                             _forgotPass();
                           }

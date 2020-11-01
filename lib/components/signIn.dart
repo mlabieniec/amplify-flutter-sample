@@ -14,8 +14,8 @@ class SignInState extends State<SignIn> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  String _signUpError = "";
-  List<String> _signUpExceptions = [];
+  //String _signUpError = "";
+  //List<String> _signUpExceptions = [];
 
   void _signIn() async {
     try {
@@ -76,7 +76,6 @@ class SignInState extends State<SignIn> {
                       padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
                       child: RaisedButton(
                         onPressed: () {
-                          // Validate returns true if the form is valid, otherwise false.
                           if (_formKey.currentState.validate()) {
                             _signIn();
                           }
