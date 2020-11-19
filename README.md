@@ -5,8 +5,8 @@ An example application using the AWS Amplify Framework and Flutter. To get start
 ```bash
 
 $ npm i -g @aws-amplify/cli@flutter-preview
-$ git clone git@github.com:mlabieniec/flutter-amplify-auth
-$ cd flutter-amplify-auth
+$ git clone git@github.com:mlabieniec/flutter-amplify-sample
+$ cd flutter-amplify-sample
 $ flutter pub get
 $ amplify init
 $ flutter run # ensure you have an emulator running or device attached
