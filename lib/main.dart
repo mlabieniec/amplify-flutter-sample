@@ -116,7 +116,7 @@ class MyApp extends State<MyAppState> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        title: 'Photos',
+        title: 'Amplify',
         theme: ThemeData(
           primarySwatch: Colors.deepOrange,
           accentColor: Colors.grey,

@@ -12,7 +12,7 @@ class Authenticator extends StatelessWidget {
         length: 3,
         child: Scaffold(
             appBar: AppBar(
-              title: Text("Photos"),
+              title: Text("Amplify"),
               leading: Padding(
                   padding: EdgeInsets.fromLTRB(15, 5, 0, 5),
                   child: Image.asset('assets/amplify.png')),
