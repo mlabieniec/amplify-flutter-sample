@@ -20,9 +20,10 @@ $ flutter run
 
 - [Amplify Flutter Documentation](https://docs.amplify.aws/lib/project-setup/prereq/q/platform/flutter)
 - [Beginner's Guide to Futures](https://medium.com/flutter-community/a-guide-to-using-futures-in-flutter-for-beginners-ebeddfbfb967)
+- [Amplify Flutter on Pub.dev](https://pub.dev/publishers/aws-amplify.com/packages)
 - [Using the Camera](https://flutter.dev/docs/cookbook/plugins/picture-using-camera#complete-example)
 
-For help getting started with Flutter, view our
+For help getting started with Flutter, view the
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
 
