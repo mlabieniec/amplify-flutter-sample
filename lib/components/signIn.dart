@@ -27,9 +27,10 @@ class SignInState extends State<SignIn> {
       dev.log('Sign In Result: ' + res.toString(),
           name: 'com.amazonaws.amplify');
     } on AuthError catch (e) {
+      print(e.exceptionList[1].detail);
       Scaffold.of(context).hideCurrentSnackBar();
       Scaffold.of(context)
-          .showSnackBar(SnackBar(content: Text(e.exceptionList[1].detail)));
+          .showSnackBar(SnackBar(content: Text("Error Signing in")));
     }
   }
 

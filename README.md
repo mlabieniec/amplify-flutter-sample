@@ -1,14 +1,15 @@
-# AWS Amplify Flutter Demo App
+# Amplify Flutter Sample App
 
-An example application using the AWS Amplify Framework and Flutter. To get started, install the Amplify CLI.
+An example application using the Amplify Framework and Flutter. To get started, install the Amplify CLI and review the documentation for Amplify Flutter: https://docs.amplify.aws/lib/project-setup/prereq/q/platform/flutter
 
 ```bash
 
 $ npm i -g @aws-amplify/cli@flutter-preview
 $ git clone git@github.com:mlabieniec/flutter-amplify-sample
 $ cd flutter-amplify-sample
-$ flutter pub get
 $ amplify init
+$ amplify push
+$ flutter pub get
 $ flutter run # ensure you have an emulator running or device attached
 
 ```
