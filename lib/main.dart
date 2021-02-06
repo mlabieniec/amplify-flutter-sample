@@ -64,11 +64,11 @@ class MyApp extends State<MyAppState> {
     try {
       var session = await auth.fetchAuthSession();
       // ignore: unnecessary_this
-      this.authenticated = session.isSignedIn;
+      authenticated = session.isSignedIn;
     } catch (error) {
       // if not signed in this should be caught
       // either way we will setup HUB events
-      // print(error);
+      print(error);
     }
     this._setupAuthEvents();
   }
@@ -122,7 +122,7 @@ class MyApp extends State<MyAppState> {
           future: _checkSession(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.done) {
-              return this.authenticated ? Home(auth: auth) : Authenticator();
+              return authenticated ? Home(auth: auth) : Authenticator();
             } else {
               return Center(child: CircularProgressIndicator());
             }
