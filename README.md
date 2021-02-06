@@ -5,7 +5,7 @@ An example application using the Amplify Framework and Flutter. To get started, 
  - Review the [Amplify Flutter Documentation](https://docs.amplify.aws/lib/project-setup/prereq/q/platform/flutter)
 
 ```bash
-$ npm i -g @aws-amplify/cli@flutter-preview
+$ npm i -g @aws-amplify/cli
 $ git clone git@github.com:mlabieniec/flutter-amplify-sample
 $ cd flutter-amplify-sample
 $ amplify init
