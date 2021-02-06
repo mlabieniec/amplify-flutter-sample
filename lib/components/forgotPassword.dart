@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
-import 'package:amplify_core/amplify_core.dart';
+import 'package:amplify_flutter/amplify.dart';
 
 class ForgotPassword extends StatefulWidget {
   ForgotPassword({Key key}) : super(key: key);
@@ -19,8 +19,7 @@ class ForgotPasswordState extends State<ForgotPassword> {
   void _forgotPass() async {
     try {
       ResetPasswordResult res = await Amplify.Auth.resetPassword(
-        username: _usernameController.text.trim()
-      );
+          username: _usernameController.text.trim());
       print(res);
       setState(() {
         _isReset = true;
@@ -34,24 +33,23 @@ class ForgotPasswordState extends State<ForgotPassword> {
         _isReset = false;
       });
       Scaffold.of(context).hideCurrentSnackBar();
-      Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text(e.exceptionList[1].detail)));
+      Scaffold.of(context)
+          .showSnackBar(SnackBar(content: Text(e.exceptionList[1].detail)));
     }
   }
 
   void _confirmForgotPass() async {
     try {
       await Amplify.Auth.confirmPassword(
-        username: _usernameController.text.trim(),
-        newPassword: _passwordController.text.trim(),
-        confirmationCode: _confirmController.text.trim()
-      );
+          username: _usernameController.text.trim(),
+          newPassword: _passwordController.text.trim(),
+          confirmationCode: _confirmController.text.trim());
       setState(() {
         _isReset = false;
       });
       Scaffold.of(context).hideCurrentSnackBar();
-      Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text("Your password has been reset.")));
+      Scaffold.of(context).showSnackBar(
+          SnackBar(content: Text("Your password has been reset.")));
     } on AuthError catch (e) {
       print(e.exceptionList[1].detail);
       Scaffold.of(context).hideCurrentSnackBar();
@@ -68,19 +66,17 @@ class ForgotPasswordState extends State<ForgotPassword> {
             child: Column(
               children: <Widget>[
                 Visibility(
-                  visible: _isReset,
-                  child: Column(
-                    children: [
+                    visible: _isReset,
+                    child: Column(children: [
                       Padding(
-                        padding: EdgeInsets.all(10),
-                        child: Text('Enter Confirmation Code',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold, fontSize: 24)
-                          )
-                      ),
+                          padding: EdgeInsets.all(10),
+                          child: Text('Enter Confirmation Code',
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold, fontSize: 24))),
                       TextFormField(
                         controller: _confirmController,
-                        decoration: InputDecoration(hintText:'Enter Confirmation Code'),
+                        decoration: InputDecoration(
+                            hintText: 'Enter Confirmation Code'),
                         validator: (value) {
                           if (value.isEmpty) {
                             return 'Please enter a Confirmation Code';
@@ -90,7 +86,8 @@ class ForgotPasswordState extends State<ForgotPassword> {
                       ),
                       TextFormField(
                         controller: _passwordController,
-                        decoration: InputDecoration(hintText:'Enter a New Password'),
+                        decoration:
+                            InputDecoration(hintText: 'Enter a New Password'),
                         obscureText: true,
                         validator: (value) {
                           if (value.isEmpty) {
@@ -112,24 +109,21 @@ class ForgotPasswordState extends State<ForgotPassword> {
                               },
                               child: Text('SUBMIT'),
                             ),
-                          )
-                      ),
-                    ]
-                  )
-                ),
+                          )),
+                    ])),
                 Visibility(
-                  visible: !_isReset,
-                  child: Column(
-                    children: [
+                    visible: !_isReset,
+                    child: Column(children: [
                       Padding(
                         padding: EdgeInsets.all(10),
                         child: Text('Forgot Password',
-                            style:
-                                TextStyle(fontWeight: FontWeight.w400, fontSize: 24)),
+                            style: TextStyle(
+                                fontWeight: FontWeight.w400, fontSize: 24)),
                       ),
                       TextFormField(
                         controller: _usernameController,
-                        decoration: InputDecoration(hintText: "Enter your Username"),
+                        decoration:
+                            InputDecoration(hintText: "Enter your Username"),
                         // The validator receives the text that the user has entered.
                         validator: (value) {
                           if (value.isEmpty) {
@@ -152,9 +146,7 @@ class ForgotPasswordState extends State<ForgotPassword> {
                               child: Text('SUBMIT'),
                             ),
                           )),
-                    ]
-                  )  
-                )
+                    ]))
               ],
             )));
   }

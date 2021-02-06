@@ -23,7 +23,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  amplify_core:
+  amplify_flutter:
   amplify_analytics_pinpoint:
   amplify_auth_cognito:
   amplify_storage_s3:

@@ -1,6 +1,6 @@
+import 'package:amplify_flutter/amplify.dart';
 import 'package:amplify_analytics_pinpoint/amplify_analytics_pinpoint.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
-import 'package:amplify_core/amplify_core.dart';
 import 'package:amplify_storage_s3/amplify_storage_s3.dart';
 import 'package:flutter/material.dart';
 import 'amplifyconfiguration.dart';
@@ -17,7 +17,6 @@ class MyAppState extends StatefulWidget {
 }
 
 class MyApp extends State<MyAppState> {
-  Amplify amplify = Amplify();
   AmplifyAuthCognito auth = AmplifyAuthCognito();
   AmplifyStorageS3 storage = AmplifyStorageS3();
   AmplifyAnalyticsPinpoint analytics = AmplifyAnalyticsPinpoint();
@@ -32,10 +31,7 @@ class MyApp extends State<MyAppState> {
     // be added here in order for configuration to work
     // DO NOT add plugins that you haven't configured via
     // the Amplify CLI. This will throw a configuration error.
-    amplify.addPlugin(
-        authPlugins: [auth],
-        storagePlugins: [storage],
-        analyticsPlugins: [analytics]);
+    Amplify.addPlugins([auth, storage, analytics]);
 
     // Configure Amplify categories via the amplifyconfiguration.dart
     // configuration that was generated via the Amplify CLI
@@ -45,16 +41,15 @@ class MyApp extends State<MyAppState> {
     // $ amplify init
     //
     // from the terminal and choose "flutter" as the framework
-    amplify.configure(amplifyconfig).then((value) {
+    Amplify.configure(amplifyconfig).then((value) {
       print("Amplify Configured");
       setState(() {
         configured = true;
       });
-    }).catchError((e) {
-      return print(e);
-    });
+    }).catchError(print);
   }
 
+  // ignore: slash_for_doc_comments
   /**
    * Check the current authentication session
    * if there is a session active, set the state
@@ -68,6 +63,7 @@ class MyApp extends State<MyAppState> {
     print("Checking Auth Session...");
     try {
       var session = await auth.fetchAuthSession();
+      // ignore: unnecessary_this
       this.authenticated = session.isSignedIn;
     } catch (error) {
       // if not signed in this should be caught
@@ -78,8 +74,8 @@ class MyApp extends State<MyAppState> {
   }
 
   void _setupAuthEvents() {
-    auth.events.listenToAuth((hubEvent) {
-      switch (hubEvent["eventName"]) {
+    Amplify.Hub.listen([HubChannel.Auth], (hubEvent) {
+      switch (hubEvent.eventName) {
         case "SIGNED_IN":
           {
             print("HUB: USER IS SIGNED IN");

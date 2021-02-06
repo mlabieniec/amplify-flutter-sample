@@ -5,7 +5,7 @@ import 'package:path/path.dart' show join;
 import 'package:path_provider/path_provider.dart';
 import 'dart:io';
 import 'package:amplify_storage_s3/amplify_storage_s3.dart';
-import 'package:amplify_core/amplify_core.dart';
+import 'package:amplify_flutter/amplify.dart';
 
 class TakePictureScreen extends StatefulWidget {
   final CameraDescription camera;
@@ -86,7 +86,7 @@ class TakePictureScreenState extends State<TakePictureScreen> {
             );
 
             // Attempt to take a picture and log where it's been saved.
-            await _controller.takePicture(path);
+            await _controller.takePicture();
 
             // If the picture was taken, display it on a new screen.
             Navigator.push(
@@ -113,8 +113,7 @@ class DisplayPictureScreen extends StatelessWidget {
 
   _toast(context, message) {
     Scaffold.of(context).hideCurrentSnackBar();
-    Scaffold.of(context)
-            .showSnackBar(SnackBar(content: Text(message)));
+    Scaffold.of(context).showSnackBar(SnackBar(content: Text(message)));
   }
 
   @override
@@ -131,18 +130,19 @@ class DisplayPictureScreen extends StatelessWidget {
           Map<String, String> metadata = <String, String>{};
           metadata['name'] = 'flutter-amplify-$key';
           metadata['desc'] = 'Uploaded with Amplify for Flutter';
-          S3UploadFileOptions options = S3UploadFileOptions(accessLevel: StorageAccessLevel.protected, metadata: metadata);
+          S3UploadFileOptions options = S3UploadFileOptions(
+              accessLevel: StorageAccessLevel.protected, metadata: metadata);
           try {
             File local = File(this.imagePath);
             Amplify.Storage.uploadFile(key: key, local: local, options: options)
-              .then((UploadFileResult result) {
-                _toast(context, "Upload Complete");
-                Navigator.pop(context);
-              }).catchError((error) {
-                _toast(context, "Upload Failed");
-                Navigator.pop(context);
-                print(error);
-              });
+                .then((UploadFileResult result) {
+              _toast(context, "Upload Complete");
+              Navigator.pop(context);
+            }).catchError((error) {
+              _toast(context, "Upload Failed");
+              Navigator.pop(context);
+              print(error);
+            });
           } catch (e) {
             _toast(context, "Upload Failed");
             Navigator.pop(context);
