@@ -63,7 +63,6 @@ class MyApp extends State<MyAppState> {
     print("Checking Auth Session...");
     try {
       var session = await auth.fetchAuthSession();
-      // ignore: unnecessary_this
       authenticated = session.isSignedIn;
     } catch (error) {
       // if not signed in this should be caught
