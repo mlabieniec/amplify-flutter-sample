@@ -27,14 +27,13 @@ class ForgotPasswordState extends State<ForgotPassword> {
       Scaffold.of(context).hideCurrentSnackBar();
       Scaffold.of(context).showSnackBar(SnackBar(
           content: Text("Please enter the confirmation code that was sent")));
-    } on AuthError catch (e) {
-      print(e.exceptionList[1].detail);
+    } on AuthException catch (e) {
+      print(e.message);
       setState(() {
         _isReset = false;
       });
       Scaffold.of(context).hideCurrentSnackBar();
-      Scaffold.of(context)
-          .showSnackBar(SnackBar(content: Text(e.exceptionList[1].detail)));
+      Scaffold.of(context).showSnackBar(SnackBar(content: Text(e.message)));
     }
   }
 
@@ -50,8 +49,8 @@ class ForgotPasswordState extends State<ForgotPassword> {
       Scaffold.of(context).hideCurrentSnackBar();
       Scaffold.of(context).showSnackBar(
           SnackBar(content: Text("Your password has been reset.")));
-    } on AuthError catch (e) {
-      print(e.exceptionList[1].detail);
+    } on AuthException catch (e) {
+      print(e.message);
       Scaffold.of(context).hideCurrentSnackBar();
       Scaffold.of(context).showSnackBar(SnackBar(
           content: Text("Reset failed, please check your confirmation code.")));

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
 import 'package:amplify_flutter/amplify.dart';
-import 'dart:developer' as dev;
 
 class SignUp extends StatefulWidget {
   SignUp({Key key}) : super(key: key);
@@ -31,11 +30,11 @@ class SignUpState extends State<SignUp> {
       setState(() {
         _isSignedUp = true;
       });
-    } on AuthError catch (error) {
+    } on AuthException catch (error) {
       setState(() {
         _isSignedUp = false;
       });
-      print(error.exceptionList[1].detail);
+      print(error.message);
       Scaffold.of(context).hideCurrentSnackBar();
       Scaffold.of(context).showSnackBar(SnackBar(
           content: Text("Sign up failed, do you already have an account?")));
@@ -54,8 +53,8 @@ class SignUpState extends State<SignUp> {
       setState(() {
         _isSignedUp = false;
       });
-    } on AuthError catch (error) {
-      dev.log(error.toString());
+    } on AuthException catch (error) {
+      print(error.message);
       setState(() {
         _isSignedUp = false;
       });

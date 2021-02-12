@@ -27,8 +27,8 @@ class SignInState extends State<SignIn> {
           password: _passwordController.text.trim());
       dev.log('Sign In Result: ' + res.toString(),
           name: 'com.amazonaws.amplify');
-    } on AuthError catch (e) {
-      print(e.exceptionList[1].detail);
+    } on AuthException catch (e) {
+      print(e.message);
       Scaffold.of(context).hideCurrentSnackBar();
       Scaffold.of(context)
           .showSnackBar(SnackBar(content: Text("Error Signing in")));

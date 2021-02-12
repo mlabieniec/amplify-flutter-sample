@@ -27,6 +27,7 @@ dependencies:
   amplify_analytics_pinpoint:
   amplify_auth_cognito:
   amplify_storage_s3:
+  amplify_datastore:
   camera:
   path_provider:
   path:

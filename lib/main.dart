@@ -64,6 +64,7 @@ class MyApp extends State<MyAppState> {
     try {
       var session = await auth.fetchAuthSession();
       authenticated = session.isSignedIn;
+      // ignore: avoid_catches_without_on_clauses
     } catch (error) {
       // if not signed in this should be caught
       // either way we will setup HUB events
