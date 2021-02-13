@@ -1,4 +1,6 @@
 import 'package:amplify_auth_cognito/amplify_auth_cognito.dart';
+import 'package:amplify_flutter/amplify.dart';
+import 'package:amplify_storage_s3/amplify_storage_s3.dart';
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 import 'capture.dart';
@@ -26,6 +28,17 @@ class HomeState extends State<Home> {
     } on Exception catch (e) {
       print(e);
     }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    S3ListOptions options =
+        S3ListOptions(accessLevel: StorageAccessLevel.protected);
+    Amplify.Storage.list(options: options).then((result) {
+      print("Storage items");
+      print(result);
+    }).catchError(print);
   }
 
   @override

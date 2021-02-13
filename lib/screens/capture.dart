@@ -3,8 +3,8 @@ import 'dart:io';
 
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
-import 'package:path/path.dart' show join;
-import 'package:path_provider/path_provider.dart';
+import 'package:amplify_storage_s3/amplify_storage_s3.dart';
+import 'package:amplify_flutter/amplify.dart';
 
 // A screen that allows users to take a picture using a given camera.
 class Capture extends StatefulWidget {
@@ -22,6 +22,11 @@ class Capture extends StatefulWidget {
 class CaptureState extends State<Capture> {
   CameraController _controller;
   Future<void> _initializeControllerFuture;
+
+  _toast(context, message) {
+    Scaffold.of(context).hideCurrentSnackBar();
+    Scaffold.of(context).showSnackBar(SnackBar(content: Text(message)));
+  }
 
   @override
   void initState() {
@@ -75,27 +80,19 @@ class CaptureState extends State<Capture> {
           try {
             // Ensure that the camera is initialized.
             await _initializeControllerFuture;
-
-            // Construct the path where the image should be saved using the
-            // pattern package.
-            final path = join(
-              // Store the picture in the temp directory.
-              // Find the temp directory using the `path_provider` plugin.
-              (await getTemporaryDirectory()).path,
-              '${DateTime.now()}.png',
-            );
-
             // Attempt to take a picture and log where it's been saved.
-            await _controller.takePicture();
-
+            var file = await _controller.takePicture();
+            print("Capture saved:");
+            print(file.path);
             // If the picture was taken, display it on a new screen.
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) => DisplayPictureScreen(imagePath: path),
+                builder: (context) =>
+                    DisplayPictureScreen(imagePath: file.path),
               ),
             );
-          } catch (e) {
+          } on Exception catch (e) {
             // If an error occurs, log the error to the console.
             print(e);
           }
@@ -115,14 +112,34 @@ class DisplayPictureScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.save_alt),
-        backgroundColor: Theme.of(context).accentColor,
+        child: Icon(Icons.cloud_upload),
+        backgroundColor: Theme.of(context).primaryColor,
         // Provide an onPressed callback.
         onPressed: () {
-          Navigator.pop(context);
+          print("Uploading file...");
+          print(imagePath);
+          var key = new DateTime.now().toString();
+          Map<String, String> metadata = <String, String>{};
+          metadata['name'] = 'flutter-amplify-$key';
+          metadata['desc'] = 'Uploaded with Amplify for Flutter';
+          S3UploadFileOptions options = S3UploadFileOptions(
+              accessLevel: StorageAccessLevel.protected, metadata: metadata);
+          try {
+            File local = File(imagePath);
+            Amplify.Storage.uploadFile(key: key, local: local, options: options)
+                .then((UploadFileResult result) {
+              Navigator.pop(context);
+            }).catchError((error) {
+              Navigator.pop(context);
+              print(error);
+            });
+          } on Exception catch (e) {
+            Navigator.pop(context);
+            print(e);
+          }
         },
       ),
-      appBar: AppBar(title: Text('Edit and Save')),
+      appBar: AppBar(title: Text('Upload Photo')),
       // The image is stored as a file on the device. Use the `Image.file`
       // constructor with the given path to display the image.
       body: Image.file(File(imagePath)),
