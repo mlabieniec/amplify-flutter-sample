@@ -33,11 +33,14 @@ class HomeState extends State<Home> {
   @override
   void initState() {
     super.initState();
-    S3ListOptions options =
+    Amplify.Auth.getCurrentUser().then((user) {
+      S3ListOptions options =
         S3ListOptions(accessLevel: StorageAccessLevel.protected);
-    Amplify.Storage.list(options: options).then((result) {
-      print("Storage items");
-      print(result);
+      Amplify.Storage.list(path: 'protected', options: options).then((result) {
+        print("Storage items");
+        print(result.items);
+      }).catchError(print);
+
     }).catchError(print);
   }
 
