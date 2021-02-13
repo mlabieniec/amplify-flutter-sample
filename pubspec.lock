@@ -43,13 +43,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.2-dev.2"
-  amplify_datastore:
-    dependency: "direct main"
-    description:
-      name: amplify_datastore
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.0.2-dev.2"
   amplify_datastore_plugin_interface:
     dependency: transitive
     description:

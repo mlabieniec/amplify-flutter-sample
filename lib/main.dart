@@ -70,7 +70,7 @@ class MyApp extends State<MyAppState> {
       // either way we will setup HUB events
       print(error);
     }
-    this._setupAuthEvents();
+    _setupAuthEvents();
   }
 
   void _setupAuthEvents() {

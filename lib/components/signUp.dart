@@ -21,7 +21,7 @@ class SignUpState extends State<SignUp> {
 
   void _signUp() async {
     Scaffold.of(context).showSnackBar(SnackBar(content: Text("Signing Up...")));
-    Map<String, dynamic> userAttributes = {"email": _emailController.text};
+    Map<String, String> userAttributes = {"email": _emailController.text};
     try {
       await Amplify.Auth.signUp(
           username: _usernameController.text.trim(),
@@ -38,6 +38,11 @@ class SignUpState extends State<SignUp> {
       Scaffold.of(context).hideCurrentSnackBar();
       Scaffold.of(context).showSnackBar(SnackBar(
           content: Text("Sign up failed, do you already have an account?")));
+    } on Exception catch (error) {
+      print(error);
+      Scaffold.of(context).hideCurrentSnackBar();
+      Scaffold.of(context)
+          .showSnackBar(SnackBar(content: Text("An unknown error occurred")));
     }
   }
 
