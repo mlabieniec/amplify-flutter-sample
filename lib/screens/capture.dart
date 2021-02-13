@@ -122,11 +122,8 @@ class DisplayPictureScreen extends StatelessWidget {
               imagePath.substring(imagePath.length - 3, imagePath.length);
           var key = new DateTime.now().microsecondsSinceEpoch.toString() +
               ".$extension";
-          Map<String, String> metadata = <String, String>{};
-          metadata['name'] = 'flutter-amplify-$key.$extension';
-          metadata['desc'] = 'Uploaded with Amplify for Flutter';
-          S3UploadFileOptions options = S3UploadFileOptions(
-              accessLevel: StorageAccessLevel.protected, metadata: metadata);
+          S3UploadFileOptions options =
+              S3UploadFileOptions(accessLevel: StorageAccessLevel.protected);
           try {
             File local = File(imagePath);
             Amplify.Storage.uploadFile(key: key, local: local, options: options)
